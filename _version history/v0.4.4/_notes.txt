@@ -1,0 +1,280 @@
+Laser Flag, by Jesse Stuart Leitch
+
+Version History:
+v0.4.4  02/13/2023  invented Grunt overwatch rules (3 shots but +3 penalty)
+v0.4.3  02/13/2023  added some additional methods to the Unit superclass so
+                        that each subclass has a place to implement bonuses
+                    changed status indicator rules:
+                        - black dots indicate remaining AP
+                        - cyan / red to indicate whether unit can move
+                        - laser recharge symbol if unit cannot fire
+                    added option to view enemy sight lines
+v0.4.2  02/12/2023  linked all color settings including unit circle
+                    tweaked hit/miss report message and timer
+                    fixed so target symbol disappears immediately after firing
+v0.4.1  02/12/2023  added all roll calculations to status labels - still need
+                    to actually implement them in the roll however
+v0.4.0  02/12/2023  refactored unit and target selection methods
+                    implemented roll calculation method and dictionary
+                    cover & elevation systems seem to work
+                    still need to report to labels
+v0.3.6  02/12/2023  moved determine_range() and determine_los() calls from
+                        main game loop into to the unit_move() method and stored
+                        those values with unit class variables
+v0.3.5  02/12/2023  moved build_teams to the game_map module
+                    changed team-related buttons to dictionary entries
+                    started refactoring _on_select_unit and _on_target_unit
+                    moved Tile class to its own module
+v0.3.4  02/11/2023  fixed the background lasers
+v0.3.3  02/11/2023  organized the haphazard tile.point system
+                    but something broke the background lasers
+v0.3.2  02/11/2023  implemented scoring
+v0.3.1  02/11/2023  put in some code to read version info from this file
+v0.3.0  02/11/2023  implemented laser hits (on units) and recharging
+v0.2.1  02/10/2023  moved the "move unit" method to the unit class
+                    added a little D6 function
+                    moved selection and deselection into their own methods
+v0.2.0  02/10/2023  implemented flags in the LOS functions to decide corner
+                            permissiveness
+                    converted ASCII reader to a dictionary in settings
+                    changed self.teams from a list to a dictionary
+v0.1.1  02/10/2023  line-of-sight seems to be working properly
+v0.1.0  02/10/2023  implemented basic line-of-sight; still buggy
+v0.0.2  02/09/2023  a bit more refactoring; fixed a bug with climbing units
+v0.0.1  02/08/2023  refactored a bunch of shit
+v0.0.0  02/08/2023  map-loading and movement rules complete
+
+
+################################################################################
+ROADMAP:
+################################################################################
+
+Need to add overwatch rules
+    change inactive team's 'end turn' button to the overwatch icon
+    allow active team to click and hold to view enemy overwatch zones
+
+#####################
+FIRST PLAYABLE ALPHA
+#####################
+
+Implement a second base type:
+
+    wall bases can be shot for extra points
+        - unit must touch one of 8 adjoining tiles to recharge
+
+    floor bases can be blocked by enemy units
+        - unit must stand on tile to recharge
+
+Need to add victory conditions
+
+refine LOS line generating to draw denser lines, but only draw lines
+from appropriate tile faces:
+    _Tile class should contain 8 dictionaries, each one containing a set of
+        corner points
+    LOS calculator just needs another elif to generate a new set of test lines
+
+build a main menu / map loader
+
+build a map editor
+
+build a help screen
+
+expand map format to include rule modifications
+    put it in JSON format maybe
+
+Allow for various map sizes & shapes
+    max 21 tiles
+    min needs to be play tested, maybe 11
+
+################################################
+When all of the above are complete, issue v1.0.0
+################################################
+
+Maybe: fog of war option
+
+Maybe: animate laser shots
+
+Maybe: add sounds and music
+    Mickey and Jeremy Ensley and Eric Morin help?
+
+Clean up all images:
+    remove tile edges on right and bottom of everything except walls
+    adjust everything down to 39x39 except wall and floor
+    make new 40x40 floor image, rotate randomly after loading:
+        rotation = choice([0, 90, 180, 270])
+        image = pygame.transform.rotate(image, rotation)
+
+
+
+################################################################################
+RULES:
+################################################################################
+
+Players take turns moving teams of units. Each unit can move around the
+map and fire his laser. Each turn a unit may perform 3 actions, but firing
+ends his turn (with exceptions). Soldiers move upon a grid and take up one grid
+square each.
+
+A unit that has been hit has his laser gun deactivated and must step on home
+base to recharge his laser. Charging begins automatically; however, the unit
+must wait until the next turn to fire again.
+    - if the map does not include a base for that unit's team, the unit is
+        eliminated from the game and removed from the board
+
+Three possible game modes depending on the map:
+
+    Capture the Flag: each team has at least one base
+    Victory conditions: all enemy units are discharged and bases are blocked AND/OR
+                        first to a set score AND/OR
+                        highest score after set number of turns AND/OR
+
+
+
+    Assault: only one team has a base
+    Victory conditions:  Capture the Flag victory conditions AND/OR:
+                            team with no base is on offense
+                            other team is on defense
+                            offense tries to score as many points
+                                as possible before all their units
+                                are eliminated
+
+    Elimination: no bases on the map
+    Victory conditions: Capture the Flag victory conditions AND/OR:
+                            last man standing wins
+
+Map data will include turn limits and target scores
+    - maps can be asymmetrical, so allow different target scores per team
+
+
+
+Line-of-sight rules:
+    If a line can be drawn from any part of a unit's square to any part of a
+    target tile, without a wall blocking it, then the unit can hit that tile
+    with his laser.
+
+ (tentative algorithm):
+    create 25 lines:
+        from shooter's 4 corners and center to target's 4 corners and center
+        if any line does not collide with a wall, LOS is established
+    BASES hang from the ceiling and do not block any LOS
+
+
+Units can be plain, or one of three classes:
+
+    SCOUTS can move quickly but are poor shooters
+        (+1 move, -1 attack)
+        ALSO after firing can keep moving
+
+    SNIPERS are slow movers but excellent shooters
+        (-1 move, +1 attack)
+        ALSO after firing can keep firing
+
+    GRUNTS are in between, but are better at defense
+        (+1 cover defense bonus, -1 elevation attack bonus)
+        ALSO can perform 3 overwatch shot but has +3 penalty
+
+
+    MOVEMENT RULES:
+        each unit gets 3 AP (action points) per turn to use for movement or firing:
+            GRUNT turn ends after firing once
+            SCOUT may fire once and keep moving
+            SNIPER may keep firing but cannot move again
+        each class moves at different speeds:
+            GRUNT can move 5 squares per AP
+            SNIPER can move 4
+            SCOUT can move 6
+
+        units can move diagonally but may not pass a wall corner
+            diagonal motion is not inhibited by corners of cover or other units
+
+OVERWATCH:
+    a unit enters overwatch mode if he has APs remaining and has not fired:
+        -   allows reaction shots against enemy unit who lands in his LOS but
+            with a +2 penalty
+        -   can only take a maximum of 2 shots, even if ending with 3 AP
+            - Grunt gets a maximum of 3 but his penalty is increased
+
+
+
+
+
+TERRAIN:
+    a grid, maximum side 21x21 tiles, the squares of which can be:
+        level    : no movement or LOS restrictions.
+        wall     : stop unit movement and line-of-sight
+        elevated : slow unit movement but not line-of-sight
+                   requires remainder of AP to climb
+        base     : same as level
+
+TACTICAL POSITIONS:
+    a unit is IN COVER against an enemy unit if:
+        on level ground, adjacent to a cover square OR
+        on any ground, adjacent to a wall:
+            he is IN COVER against any attacks that come from that side
+    a unit is ELEVATED if he is on top of a cover object
+
+    a unit IN COVER has a +2 defensive bonus
+        a grunt in cover has a +3 defensive bonus
+    a unit ELEVATED has a +2 attack bonus but a -2 defensive penalty
+        a grunt only gets a +1 attack bonus
+
+
+HIT DICE:
+    roll 2D6 to determine hits
+    base to-hit: must roll 7 or greater
+
+        NOTE: ENEMY BASE SHOULD MAYBE BE EASIER TO HIT; NEED TO PLAYTEST
+
+
+################################################################################
+ROLL CHARTS:
+################################################################################
+
+roll 2D6
+   2 :   1/36     36/36     100% will be greater than or equal to
+   3 :   2/36     35/36      97% will be greater than or equal to
+   4 :   3/36     33/36      92% will be greater than or equal to
+   5 :   4/36     30/36      83% will be greater than or equal to
+   6 :   5/36     26/36      72% will be greater than or equal to
+   7 :   6/36     21/36      58% will be greater than or equal to
+   8 :   5/36     15/36      42% will be greater than or equal to
+   9 :   4/36     10/36      28% will be greater than or equal to
+  10 :   3/36      6/36      17% will be greater than or equal to
+  11 :   2/36      3/36       8% will be greater than or equal to
+  12 :   1/36      1/36       3% will be greater than or equal to
+
+Calculations:
+    scout on LEVEL ground:
+        need  8 or better to hit LEVEL    enemy   (42%)
+        need 10 or better to hit IN COVER enemy   (17%)
+        need 11 or better to hit IN COVER grunt   (8%)
+        need  6 or better to hit ELEVATED enemy   (72%)
+    scout on ELEVATED ground:
+        need  7 or better to hit LEVEL    enemy   (58%)
+        need  9 or better to hit IN COVER enemy   (28%)
+        need 10 or better to hit IN COVER grunt   (17%)
+        need  5 or better to hit ELEVATED enemy   (83%)
+
+    grunt on LEVEL ground:
+        need  7 or better to hit LEVEL    enemy   (58%)
+        need  9 or better to hit IN COVER enemy   (28%)
+        need 10 or better to hit IN COVER grunt   (17%)
+        need  5 or better to hit ELEVATED enemy   (83%)
+    grunt on ELEVATED ground:
+        need  6 or better to hit LEVEL    enemy   (72%)
+        need  8 or better to hit IN COVER enemy   (42%)
+        need  9 or better to hit IN COVER grunt   (28%)
+        need  4 or better to hit ELEVATED enemy   (92%)
+
+    sniper on LEVEL ground:
+        need  6 or better to hit LEVEL    enemy   (72%)
+        need  8 or better to hit IN COVER enemy   (42%)
+        need  9 or better to hit IN COVER grunt   (28%)
+        need  4 or better to hit ELEVATED enemy   (92%)
+    sniper on ELEVATED ground:
+        need  5 or better to hit LEVEL    enemy   (83%)
+        need  7 or better to hit IN COVER enemy   (58%)
+        need  8 or better to hit IN COVER grunt   (42%)
+        need  3 or better to hit ELEVATED enemy   (97%)
+
+

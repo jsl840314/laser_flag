@@ -1,0 +1,40 @@
+Rolling 2 6-sided dice:
+(base roll 7) (tactics modifier 1) (grunt extra tactics modifier 1) (sniper/scout hit modifier 2)
+
+BASIC as shooter
+		normal			shooter elevated	shooter on overwatch
+ normal:	7 (58.33%)		6 (72.22%)		8 (41.67%)
+ target elev:	6 (72.22%)		5 (83.33%)		7 (58.33%)
+ target cover:	8 (41.67%)		7 (58.33%)		9 (27.78%)
+ grunt elev:	5 (83.33%)		4 (91.67%)		6 (72.22%)
+ grunt cover:	9 (27.78%)		8 (41.67%)		10 (16.67%)
+
+
+GRUNT as shooter
+		normal			shooter elevated	shooter on overwatch
+ normal:	7 (58.33%)		5 (83.33%)		9 (27.78%)
+ target elev:	6 (72.22%)		4 (91.67%)		8 (41.67%)
+ target cover:	8 (41.67%)		6 (72.22%)		10 (16.67%)
+ grunt elev:	5 (83.33%)		3 (97.22%)		7 (58.33%)
+ grunt cover:	9 (27.78%)		7 (58.33%)		11 (8.33%)
+
+
+SCOUT as shooter
+		normal			shooter elevated	shooter on overwatch
+ normal:	9 (27.78%)		8 (41.67%)		10 (16.67%)
+ target elev:	8 (41.67%)		7 (58.33%)		9 (27.78%)
+ target cover:	10 (16.67%)		9 (27.78%)		11 (8.33%)
+ grunt elev:	7 (58.33%)		6 (72.22%)		8 (41.67%)
+ grunt cover:	11 (8.33%)		10 (16.67%)		12 (2.78%)
+
+
+SNIPER as shooter
+		normal			shooter elevated	shooter on overwatch
+ normal:	5 (83.33%)		4 (91.67%)		6 (72.22%)
+ target elev:	4 (91.67%)		3 (97.22%)		5 (83.33%)
+ target cover:	6 (72.22%)		5 (83.33%)		7 (58.33%)
+ grunt elev:	3 (97.22%)		2 (100.0%)		4 (91.67%)
+ grunt cover:	7 (58.33%)		6 (72.22%)		8 (41.67%)
+
+
+zeroes: 0	hundreds: 1

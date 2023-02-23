@@ -1,0 +1,259 @@
+Laser Flag, by Jesse Stuart Leitch
+
+Version History:
+v0.10.2 02/21/2023  wrapped up the color picker; minor bug in that unit icons
+                        do not switch with the b/w switch unless unit is killed
+                        and recreated; need to load both images in unit def to
+                        fix, but maybe not necessary
+                    still need to make score limit buttons work, and then add
+                        color & score limit settings into JSON save and load
+                        methods in game_map and map_editor
+v0.10.1 02/21/2023  corrected yesterdays dates in this list
+                    started a color picker class for the map editor
+v0.10.0 02/20/2023  changed map format to JSON; new _load_map method in game map
+                        and _save_map in map editor (renamed old methods for now)
+v0.9.10 02/20/2023  raised base to-hit back to 7
+                    tweaked rules screen to fit with new mtext definition
+v0.9.9  02/20/2023  I think mtext and buttons are playing well together now
+v0.9.8  02/20/2023  got rid of the old Button class and replaced it with the new
+                        one with MText capability. Still need to work out mtext
+                        positioning kinks but it's pretty decent.
+v0.9.7  02/19/2023  map editor now has ability to adjust units
+v0.9.6  02/19/2023  map editor half functional; can load/save but still need to
+                        be able to adjust units, team colors, score limit
+                    also need to come up with a more elaborate map format:
+                        - need to be able to start units on elevated ground
+                        - need to save team colors and score limit with the map
+                    made a new button class with alt colors; need to incorporate
+                        the MText class into its labeling and then use it for
+                        the main game button frame
+v0.9.5  02/19/2023  started work on a map editor:
+                        moved Tile class image loader out of __init__
+                            into a public method
+                        fixed a few more instances of "g" and "m" as team names
+                        should be '1' and '2' everywhere BUT controlled entirely
+                            by the list settings.teams
+                            (I think the only place it still shows up is in the
+                                ASCII decoder ditionary)
+v0.9.4  02/19/2023  made MText class; overhauled Rules screen to use it
+                        deleted rules text images
+v0.9.3  02/19/2023  found one more bug in the team naming system
+v0.9.2  02/19/2023  made a subfolder in images for tilesets for different looks
+                    changed all team name references to refer to settings.teams
+                        there should be no more traces of the old 'g' and 'm'
+v0.9.1  02/18/2023  needed to call a screen update when showing inactive los
+v0.9.0  02/18/2023  implemented victory conditions
+v0.8.2  02/18/2023  made one Laser class for shot lasers and the background
+v0.8.1  02/18/2023  moved the line that deselects AP-0 from _end_overwatch() to
+                        _hide_result()
+v0.8.0  02/18/2023  fixed most of the bugs in the overwatch system
+                        needs testing but I think it's working properly
+                    put the call to _run_overwatch() in the main _run_game
+v0.7.0  02/18/2023  finished roll_result window and linked it up with overwatch
+                        mode. Still need to tweak the way overwatch displays
+                        roll info in the status boxes.
+v0.6.10 02/18/2023  cleaned up unit and target selection functions
+                    put roll message into a separate frame 
+                    changes to check_events: if roll result or rules screen are
+                        active, the next mouseclick will ONLY clear that window
+                    temporarily deactivated overwatch mode
+v0.6.9x 02/17/2023  lots of refactoring in the main module; still need to clean
+                        up the fire and overwatch funcs and selection
+v0.6.9  02/17/2023  removed walking-range animation - was distracting,
+                        and it needed access to a protected method
+                    changed all 4 tactical hit modifiers from +/- 2 to 1
+                    changed base to-hit from 7 to 6
+                    changed base move speed from 5 to 3
+v0.6.8  02/17/2023  made module _roll_checker.py to create hit tables
+                        based on different modifiers & dice
+v0.6.7  02/16/2023  moved all unit roll modifiers into settings
+                    moved the overwatch message over onto the map;
+            ########    NEED TO USE THAT BOX TO DISPLAY HIT INFO FOR
+            ########    REGULAR SHOTS TOO
+                    began building a roll tester module
+v0.6.6  02/16/2023  moved the map launcher to a separate module; running
+                    laser_flag.py as "__main__" will load the test map
+v0.6.5  02/16/2023  worked out a few bugs with showing cover in status boxes
+v0.6.4  02/16/2023  cleaned up status displays to properly display shooter vs 
+                    target in the proper active/inactive boxes,in both phases
+v0.6.3  02/15/2023  finished all listed below
+                    some map edits to reflect the new base system
+v0.6.2  02/15/2023  brought back team bases concept. Still need to reinstate
+                        Elimination mode, update Rules screen, and make team
+                        base sprites. Refer to teams G and M as 1 and 2 ingame.
+v0.6.1  02/15/2023  cleaned up map loader a bit
+v0.6.0  02/15/2023  ALPHA?
+                    made a simple map loader so friends can easily test them
+                    changed map loader dictionary so "B" makes a base
+v0.5.8  02/15/2023  eliminated concept of "team bases" entirely
+                    completed rules screen
+v0.5.7  02/15/2023  implemented most of rules screen; eliminating team bases
+                        before proceeding
+v0.5.6  02/15/2023  made the game pause after each shot so you can read the roll
+                        info; any click or keypress will continue
+                            (need to add a message for the user)
+v0.5.5  02/15/2023  made it so only relevant cover is included in target status
+                        still need to clean it up so it displays a nice string though
+v0.5.4  02/14/2023  started adding a rules screen
+                    added cover info to status boxes
+                    gave buttons/labels the ability to show 3 lines
+v0.5.3  02/14/2023  revised overwatch rules; reaction shots are triggered by
+                        firing as well as moving
+                    more image revisions; probably good enough for alpha
+v0.5.2  02/14/2023  changed rule for scouts: eliminated free move after shot but
+                        they can now climb onto elevated ground without
+                        consuming the remainder of the AP
+                    implemented alt team colors
+                    new unit icons
+                    cleaned up a few more images
+v0.5.1  02/14/2023  had some bugs in the overwatch system so moved all unit
+                        firing action into one base method, to be overridden by
+                        sniper and scout classes. Seems to work smoothly.
+                    revised unit icons and added alt color polygons to class defs
+v0.5.0  02/13/2023  basic overwatch rules implemented
+v0.4.6  02/13/2023  moved lf_game.tiles to game_map.all_tiles
+                    moved lf_game.walls to game_map.all_walls
+                    added function to eliminate units if they have no bases
+                        - for assault (one team has a recharging base) or
+                          elimination (no recharging bases on the map) rules
+v0.4.5  02/13/2023  cleaned up conditionals so that units with no laser can't
+                        click targets
+                    simplified Grunt rules: "everything +/-3 instead of 2"
+v0.4.4  02/13/2023  invented Grunt overwatch rules (3 shots but +3 penalty)
+v0.4.3  02/13/2023  added some additional methods to the Unit superclass so
+                        that each subclass has a place to implement bonuses
+                    changed status indicator rules:
+                        - black dots indicate remaining AP
+                        - cyan / red to indicate whether unit can move
+                        - laser recharge symbol if unit cannot fire
+                    added option to view enemy sight lines
+v0.4.2  02/12/2023  linked all color settings including unit circle
+                    tweaked hit/miss report message and timer
+                    fixed so target symbol disappears immediately after firing
+v0.4.1  02/12/2023  added all roll calculations to status labels - still need
+                    to actually implement them in the roll however
+v0.4.0  02/12/2023  refactored unit and target selection methods
+                    implemented roll calculation method and dictionary
+                    cover & elevation systems seem to work
+                    still need to report to labels
+v0.3.6  02/12/2023  moved determine_range() and determine_los() calls from
+                        main game loop into to the unit_move() method and stored
+                        those values with unit class variables
+v0.3.5  02/12/2023  moved build_teams to the game_map module
+                    changed team-related buttons to dictionary entries
+                    started refactoring _on_select_unit and _on_target_unit
+                    moved Tile class to its own module
+v0.3.4  02/11/2023  fixed the background lasers
+v0.3.3  02/11/2023  organized the haphazard tile.point system
+                    but something broke the background lasers
+v0.3.2  02/11/2023  implemented scoring
+v0.3.1  02/11/2023  put in some code to read version info from this file
+v0.3.0  02/11/2023  implemented laser hits (on units) and recharging
+v0.2.1  02/10/2023  moved the "move unit" method to the unit class
+                    added a little D6 function
+                    moved selection and deselection into their own methods
+v0.2.0  02/10/2023  implemented flags in the LOS functions to decide corner
+                            permissiveness
+                    converted ASCII reader to a dictionary in settings
+                    changed self.teams from a list to a dictionary
+v0.1.1  02/10/2023  line-of-sight seems to be working properly
+v0.1.0  02/10/2023  implemented basic line-of-sight; still buggy
+v0.0.2  02/09/2023  a bit more refactoring; fixed a bug with climbing units
+v0.0.1  02/08/2023  refactored a bunch of shit
+v0.0.0  02/08/2023  map-loading and movement rules complete
+
+
+################################################################################
+ROADMAP:
+################################################################################
+
+play-test overwatch system some more
+
+tweak the maps
+
+get on Git
+
+learn about distro packages
+
+#############################################
+FIRST PLAYABLE BETA READY FOR FRIEND TESTING
+#############################################
+
+make the victory screen look a little nicer
+
+revise line of sight to draw from edge midpoints as well; but only from the nearest 5 points:
+    _Tile class should contain 8 dictionaries, each one containing a set of
+        corner points
+    LOS calculator just needs another elif to generate a new set of test lines
+
+build a GUI main menu / map loader
+
+refine the map editor
+
+expand map format to include rule modifications
+    put it in JSON format maybe
+
+Allow for various map sizes & shapes
+    max 21 tiles
+    min needs to be play tested, maybe 11
+
+################################################
+When all of the above are complete, issue v1.0.0
+################################################
+
+Maybe: fog of war option
+
+Maybe: add sounds and music
+    Mickey and Jeremy Ensley and Eric Morin help?
+
+
+
+
+
+
+Several possible game modes depending on the map:
+
+    Capture the Flag: each team has at least one base
+    Victory conditions: all enemy lasers are discharged and bases are blocked AND/OR
+                        first to a set score AND/OR
+                        highest score after set number of turns AND/OR
+
+
+
+    Assault: only one team has a base
+    Victory conditions:  Capture the Flag victory conditions AND/OR:
+                            team with no base is on offense
+                            other team is on defense
+                            offense tries to score as many points
+                                as possible before all their units
+                                are eliminated
+
+    Elimination: no bases on the map
+    Victory conditions: Capture the Flag victory conditions AND/OR:
+                            last man standing wins
+
+Map data will include turn limits and target scores
+    - maps can be asymmetrical, so allow different target scores per team
+
+
+
+Line-of-sight rules:
+    If a line can be drawn from any part of a unit's square to any part of a
+    target tile, without a wall blocking it, then the unit can hit that tile
+    with his laser.
+
+ (need to fix algorithm to look like this):
+    if same row or col, only need to check 1 line
+    if diagonal, check 25 lines:
+        tiles need 4 dictionaries of "corner points" for each intercardinal:
+            each dictionary has 5 entries:
+                'front' (the corner point corresponding to the intercardinal)
+                'r_mid' (midpoint of the side clockwise from 'front')
+                'l_mid' (counterclockwise midpoint)
+                'r_cor' (corner tile clockwise from 'front')
+                'l_cor' (counterclockwise corner)
+        determine shooter-to-target direction and select
+            the appropriate dictionaries for each
+        check lines for each five points of target and shooter
+            tiles; MAKE SURE IT'S IN ORDER SINCE DICTS ARE NOT ORDERED
+        as soon as a good line is found, return it and stop looking for more
