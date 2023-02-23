@@ -1,6 +1,9 @@
 Laser Flag, by Jesse Stuart Leitch
 
 Version History:
+v0.10.7 02/23/2023  edited a few maps
+                    fixed victory message to show team name instead of number
+                    added some notes for beta testers in the readme
 v0.10.6 02/23/2023  moved version control to Git; separated this document from
                         README
 v0.10.5 02/22/2023  fixed bug where Grunts had too high elevation defense
