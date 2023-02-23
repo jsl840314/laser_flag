@@ -174,6 +174,9 @@ v0.0.0  02/08/2023  map-loading and movement rules complete
 RUNNING THE GAME
 ################################################################################
 
+Laser Flag is written in Python 3.10.2; the only non-standard module you might
+need to install is Pygame. I used version 2.1.2
+
 Run _map_launcher.py to select from the levels in the "maps" folder. Running 
 laser_flag.py directly will load the "testing ground" map. Or, try making your
 own maps with _map_editor.py
