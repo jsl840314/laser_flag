@@ -1,4 +1,4 @@
-Laser Flag, by Jesse Stuart Leitch
+Laser Flag, a tactical shooting game by Jesse Stuart Leitch
 
 
 ################################################################################
@@ -8,12 +8,32 @@ RUNNING THE GAME
 Laser Flag is written in Python 3.10.2; the only non-standard module you might
 need to install is Pygame. I used version 2.1.2
 
-Run _map_launcher.py to select from the levels in the "maps" folder. Running 
-laser_flag.py directly will load the "testing ground" map. Or, try making your
-own maps with _map_editor.py
+__launcher.py will display a menu allowing you to choose a map or open the Map
+Editor. You can run laser_flag.py directly, but it will just load a tsting map.
+
+
+
+#############################################
+NOTES FOR BETA TESTERS
+#############################################
+
+I'm not sure about all the roll modifiers or movement speeds; those parts of the
+rules will require some playtesting in order to get the best balance. The end
+goal is a game that rewards offensive risk-taking and defensive prudence in
+about equal measure.
+
+After a few rounds of playtesting, I found that the Player 1 gains a noticeable
+advantage by moving first. I was concerned by this, but then I remembered that
+even Chess is asymmetrical: at the Grandmaster level, it's quite rare for Black
+to checkmate White. For a fair match, both players must play as Black and White
+an equal number of times in a series of games. So, some of the maps have certain
+asymmetries in an attempt to reduce or accentuate the Player 1 advantage. Use
+the included map editor to help come up with different game modes!
+
+
 
 ################################################################################
-LASER FLAG RULES:
+RULES
 ################################################################################
 
 Players take turns controlling teams of units in a game of laser tag. Each unit
@@ -39,7 +59,8 @@ unit moves into or fires from a tile within line-of-sight.
 
 Laser Flag was designed to be fully playable as a board game. It should be easy
 to play with nothing more than a Lego set, a pair of six-sided dice, and a piece
-of string to determine lines-of-sight.
+of string to determine lines-of-sight. The larger "Duplo" blocks might make more
+sense.
 
 NOTE: not all maps include bases for both teams, or universal bases. If there is
 no valid recharging base for its team, any unit hit by a laser is disqualified
@@ -99,24 +120,6 @@ Line-of-sight rules:
     If a line can be drawn from any part of a unit's square to any part of a
     target tile, without a wall blocking it, then the unit can hit that tile
     with his laser.
-
-#############################################
-NOTES FOR BETA TESTERS
-#############################################
-
-I'm not sure about all the roll modifiers or movement speeds; those parts of the
-rules will require some playtesting in order to get the best balance. The end
-goal is a game that rewards offensive risk-taking and defensive prudence in
-about equal measure.
-
-After a few rounds of playtesting, I found that the Player 1 gains a noticeable
-advantage by moving first. I was concerned by this, but then I remembered that
-even Chess is asymmetrical: at the Grandmaster level, it's quite rare for Black
-to checkmate White. For a fair match, both players must play as Black and White
-an equal number of times in a series of games. So, some of the maps have certain
-asymmetries in an attempt to reduce or accentuate the Player 1 advantage. Use
-the included map editor to help come up with different game modes!
-
 
 
 ################################################################################

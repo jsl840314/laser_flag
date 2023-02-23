@@ -1,6 +1,7 @@
 
 import os
 from laser_flag import LaserFlag
+from _map_editor import MapEditor
 from lf_functions import game_caption
 
 map_list = os.listdir('maps')
@@ -10,7 +11,7 @@ while True:
     print(game_caption())
     print("*"*60)
     print()
-    print("Choose a map or (Q) to quit:\n")
+    print("Choose a map; (E) to open the Map Editor; or (Q) to quit:\n")
 
     i = 0
     for map_file in map_list:
@@ -21,6 +22,10 @@ while True:
     user_input = input()
     if user_input.upper() == 'Q':
         break
+
+    elif user_input.upper() == 'E':
+        mapeditor = MapEditor()
+        mapeditor.run()
 
     try:
         os.system('cls')
