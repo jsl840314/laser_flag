@@ -30,7 +30,10 @@ an equal number of times in a series of games. So, some of the maps have certain
 asymmetries in an attempt to reduce or accentuate the Player 1 advantage. Use
 the included map editor to help come up with different game modes!
 
-
+It's a bit awkward that you can score hits on enemy units even if their laser is
+already deactivated, but I needed a way to deincentivize camping a dead unit on
+an opposing base. One other possibility is instituting "capture points" which
+are distinct from recharging bases?
 
 ################################################################################
 RULES

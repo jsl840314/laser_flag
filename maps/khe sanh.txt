@@ -32,7 +32,7 @@
         "2": "white"
     },
     "score_limit": {
-        "1": 8,
+        "1": 10,
         "2": 20
     },
     "tiles": [
@@ -413,11 +413,11 @@
             "level",
             "level",
             "level",
+            "level",
+            "level",
             "wall",
             "level",
             "level",
-            "level",
-            "wall",
             "level",
             "level",
             "level",
@@ -434,15 +434,15 @@
             "level",
             "level",
             "level",
-            "level",
-            "level",
-            "elevated",
+            "wall",
             "level",
             "level",
             "level",
             "elevated",
             "level",
             "level",
+            "level",
+            "wall",
             "level",
             "level",
             "level",
@@ -627,43 +627,49 @@
             "1",
             "scout",
             2,
-            2
+            10
         ],
         [
-            "1",
-            "scout",
-            2,
+            "2",
+            "grunt",
+            18,
             6
         ],
         [
-            "1",
-            "scout",
-            2,
+            "2",
+            "grunt",
+            18,
+            14
+        ],
+        [
+            "2",
+            "sniper",
+            17,
             10
         ],
         [
             "1",
             "scout",
             2,
-            14
+            1
         ],
         [
             "1",
             "scout",
             2,
-            18
+            5
         ],
         [
-            "2",
-            "sniper",
-            17,
-            8
+            "1",
+            "scout",
+            2,
+            15
         ],
         [
-            "2",
-            "sniper",
-            17,
-            12
+            "1",
+            "scout",
+            2,
+            19
         ]
     ]
 }

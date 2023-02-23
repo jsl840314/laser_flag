@@ -24,9 +24,9 @@ class Victory:
             self.winner = self.teams[0]
 
         self.victory_type = victory_type
-
-        self.victory_message  = f"{self.victory_type.upper()}!"
-        self.victory_message += f" Team {self.winner} wins!"
+        self.winner_name  = self.settings.team_names[self.winner]
+        self.victory_message  = f"{self.victory_type.upper()}! "
+        self.victory_message += f"{self.winner_name} wins!"
 
 
     def show_victory(self):
