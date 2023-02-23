@@ -171,6 +171,14 @@ v0.0.1  02/08/2023  refactored a bunch of shit
 v0.0.0  02/08/2023  map-loading and movement rules complete
 
 ################################################################################
+RUNNING THE GAME
+################################################################################
+
+Run _map_launcher.py to select from the levels in the "maps" folder. Running 
+laser_flag.py directly will load the "testing ground" map. Or, try making your
+own maps with _map_editor.py
+
+################################################################################
 LASER FLAG RULES:
 ################################################################################
 
