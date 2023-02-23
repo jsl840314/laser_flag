@@ -46,7 +46,7 @@ def D6(): return choice(range(1, 7))
 
 def game_caption():
     # generate caption for main screen
-    f = open('README.txt', 'r')
+    f = open('_version.txt', 'r')
     title = f.read(71)
     f.close()
     title  = title.split('\n')
