@@ -209,12 +209,12 @@ snap shots are triggered any time a unit moves into or fires from a tile within 
 
         self.rules['plain unit'] = """
 Plain unit: move 4 squares per AP
-            roll 7 or greater to hit
-            +1 defense bonus if in cover
-            -1 defense penalty if on elevated ground
-            -1 attack bonus (low rolls are better) if on elevated ground
-            max 2 AP carried into enemy turn for snapshots
-            +1 attack penalty for snap shots
+                 roll 7 or greater to hit
+                 +1 defense bonus if in cover
+                 -1 defense penalty if on elevated ground
+                 -1 attack bonus (low rolls are better) if on elevated ground
+                 max 2 AP carried into enemy turn for snapshots
+                 +1 attack penalty for snap shots
 
 Other classes use these rules unless specified below:""".strip()
 
@@ -222,23 +222,23 @@ Other classes use these rules unless specified below:""".strip()
 
         self.rules['unit classes'] = """
 Scout:  climbing onto elevated ground doesn't consume the whole AP
-        move 5 squares per AP
-        roll 8 or greater to hit
+            move 5 squares per AP
+            roll 8 or greater to hit
 
 
 
 Sniper: firing only consumes 1 AP, but may not move after firing
-        move 3 squares per AP
-        roll 6 or greater to hit
+            move 3 squares per AP
+            roll 6 or greater to hit
 
 
 
 
 Grunt:  max 3 AP carry over for snap shots
-        +2 attack penalty for snap shots
-        +2 defense bonus if in cover
-        -2 defense penalty if on elevated ground
-        -2 attack bonus if on elevated ground
+            +2 attack penalty for snap shots
+            +2 defense bonus if in cover
+            -2 defense penalty if on elevated ground
+            -2 attack bonus if on elevated ground
         """.strip()
 
 
@@ -255,7 +255,7 @@ Cover: slows movement except for scouts
 
 
 
-Level: no movement restrictions
+Floor: no movement restrictions
 
 
 
@@ -280,9 +280,10 @@ unit hit by a laser is disqualified and removed from the room.""".strip()
         self.rules['victory'] = """
 Victory conditions:
 
-CHECKMATE: deactivate all of a team's lasers and occupy any bases they could use
-ELIMINATION: disqualify all units of a team
-SCORE: first team to the map's score limit""".strip()
+CHECKMATE:  deactivate all of a team's lasers and occupy any bases they could use
+ELIMINATION:  disqualify all units of a team
+SCORE:            first team to the map's score limit
+""".strip()
 
 
 
