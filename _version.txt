@@ -1,6 +1,7 @@
 Laser Flag, by Jesse Stuart Leitch
 
 Version History:
+v0.10.8 03/11/2023  edited some images and test in the rules screen
 v0.10.7 02/23/2023  edited a few maps
                     fixed victory message to show team name instead of number
                     added some notes for beta testers in the readme
