@@ -199,6 +199,7 @@ class GameMap:
             print(f'{unit.unit_class} eliminated! Team has no recharging base')
             unit.kill()
             unit.tile.occupied = False
+            self.clear_highlights_and_marks()
 
 
 ################################################################################
